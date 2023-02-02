@@ -1,6 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import Compose from "./screens/Compose";
 import Inbox from "./screens/Inbox";
 import SentMessages from "./screens/SentMessages";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
