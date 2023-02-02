@@ -1,11 +1,8 @@
 import { FlatList, Text } from "react-native";
+import MessageItem from "./MessageItem";
 
 function renderMessageItem(data) {
-  return (
-    <Text>
-      {data.item.sender}: {data.item.body}
-    </Text>
-  );
+  return <MessageItem {...data.item} />;
 }
 
 function InboxList({ inboxMessages }) {
