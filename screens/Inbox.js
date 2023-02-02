@@ -1,7 +1,7 @@
-import { Text } from "react-native";
+import InboxOutput from "../components/InboxOutput";
 
 function Inbox() {
-  return <Text>Inbox Screen</Text>;
+  return <InboxOutput />;
 }
 
 export default Inbox;
