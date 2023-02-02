@@ -1,7 +1,7 @@
-import { Text } from "react-native";
+import SentOutput from "../components/SentOutput";
 
 function SentMessages() {
-  return <Text>Sent Messages Screen</Text>;
+  return <SentOutput />;
 }
 
 export default SentMessages;
