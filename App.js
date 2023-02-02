@@ -5,13 +5,19 @@ import Inbox from "./screens/Inbox";
 import SentMessages from "./screens/SentMessages";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Button from "./components/UI/Button";
+import ManageMessage from "./components/ManageMessage";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
 function MessagesOverview() {
   return (
-    <BottomTabs.Navigator>
+    <BottomTabs.Navigator
+      screenOptions={{
+        headerRight: () => <Button label="Compose" onPress={() => {}} />,
+      }}
+    >
       <BottomTabs.Screen name="Inbox" component={Inbox} />
       <BottomTabs.Screen name="Sent" component={SentMessages} />
     </BottomTabs.Navigator>
@@ -29,7 +35,7 @@ export default function App() {
             component={MessagesOverview}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="Compose" component={Compose} />
+          <Stack.Screen name="ManageMessage" component={ManageMessage} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
