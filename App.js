@@ -14,9 +14,16 @@ const BottomTabs = createBottomTabNavigator();
 function MessagesOverview() {
   return (
     <BottomTabs.Navigator
-      screenOptions={{
-        headerRight: () => <Button label="Compose" onPress={() => {}} />,
-      }}
+      screenOptions={({ navigation }) => ({
+        headerRight: () => (
+          <Button
+            label="Compose"
+            onPress={() => {
+              navigation.navigate("ManageMessage");
+            }}
+          />
+        ),
+      })}
     >
       <BottomTabs.Screen name="Inbox" component={Inbox} />
       <BottomTabs.Screen name="Sent" component={SentMessages} />
@@ -35,7 +42,11 @@ export default function App() {
             component={MessagesOverview}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="ManageMessage" component={ManageMessage} />
+          <Stack.Screen
+            name="ManageMessage"
+            component={ManageMessage}
+            options={{ presentation: "modal" }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
