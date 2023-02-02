@@ -1,11 +1,15 @@
+import { useNavigation } from "@react-navigation/native";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-function MessageItem({ sender, title, body, receiver }) {
-  let messanger = "";
+function MessageItem({ id, sender, title, body, receiver }) {
+  let messanger;
   receiver ? (messanger = receiver) : (messanger = sender);
 
+  const navigation = useNavigation();
   function messagePressHandler() {
-    return "";
+    navigation.navigate("ManageMessage", {
+      messageId: id,
+    });
   }
   return (
     <Pressable
