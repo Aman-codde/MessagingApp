@@ -24,7 +24,11 @@ export default function App() {
       <StatusBar style="auto" />
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="MessagesOverview" component={MessagesOverview} />
+          <Stack.Screen
+            name="MessagesOverview"
+            component={MessagesOverview}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen name="Compose" component={Compose} />
         </Stack.Navigator>
       </NavigationContainer>
