@@ -3,8 +3,15 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 function MessageItem({ sender, title, body, receiver }) {
   let messanger = "";
   receiver ? (messanger = receiver) : (messanger = sender);
+
+  function messagePressHandler() {
+    return "";
+  }
   return (
-    <Pressable>
+    <Pressable
+      onPress={messagePressHandler}
+      style={({ pressed }) => pressed && styles.pressed}
+    >
       <View style={styles.msgContainer}>
         <Text style={styles.senderText}>{messanger}</Text>
         <Text style={styles.titleText}>{title}</Text>
@@ -33,5 +40,9 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 16,
     marginBottom: 2,
+  },
+  pressed: {
+    opacity: 0.2,
+    backgroundColor: "darkgrey",
   },
 });
