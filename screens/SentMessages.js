@@ -1,7 +1,7 @@
 import { Text } from "react-native";
 
 function SentMessages() {
-  <Text>Sent Messages</Text>;
+  return <Text>Sent Messages Screen</Text>;
 }
 
 export default SentMessages;
