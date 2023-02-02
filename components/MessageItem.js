@@ -19,17 +19,19 @@ export default MessageItem;
 const styles = StyleSheet.create({
   msgContainer: {
     flexDirection: "column",
-    padding: 12,
-    margin: 8,
+    padding: 8,
+    margin: 6,
     justifyContent: "space-between",
+    borderBottomWidth: 1,
+    borderBottomColor: "lightgrey",
   },
   senderText: {
-    fontSize: 16,
+    fontSize: 18,
     marginBottom: 4,
     fontWeight: "bold",
   },
   titleText: {
-    fontSize: 14,
+    fontSize: 16,
     marginBottom: 2,
   },
 });
