@@ -37,17 +37,15 @@ function ManageMessage({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.buttonContainer}>
-        <Button label="Cancel" onPress={cancelHandler} />
-        {!isEditing && (
-          <View>
-            <ComposeForm></ComposeForm>
-            <Button label="Send" onPress={composeHandler} />
-          </View>
-        )}
-        <View style={styles.deleteContainer}>
-          {isEditing && <Button label="Delete" onPress={deleteHandler} />}
+      <Button label="Cancel" onPress={cancelHandler} />
+      {!isEditing && (
+        <View style={styles.form}>
+          <ComposeForm></ComposeForm>
+          <Button label="Send" style={styles.button} onPress={composeHandler} />
         </View>
+      )}
+      <View style={styles.deleteContainer}>
+        {isEditing && <Button label="Delete" onPress={deleteHandler} />}
       </View>
     </View>
   );
@@ -57,11 +55,18 @@ export default ManageMessage;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    padding: 10,
+    alignItems: "left",
   },
-  buttonContainer: {
-    marginTop: 16,
-    paddingTop: 8,
-    alignItems: "center",
+  button: {
+    width: 100,
+    textAlign: "left",
+  },
+  form: {
+    margin: 10,
+    padding: 10,
+    width: 300,
+    borderWidth: 1,
+    borderRadius: 6,
   },
 });
