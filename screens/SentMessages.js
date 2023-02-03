@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import SentOutput from "../components/MessagesOutput/SentOutput";
+import MessagesOutput from "../components/MessagesOutput/MessagesOutput";
 import { MessagesContext } from "../store/messages-context";
 
 function SentMessages() {
@@ -8,7 +8,7 @@ function SentMessages() {
     (message) => message.sender == "aman"
   );
 
-  return <SentOutput sentMessages={sentMessages} />;
+  return <MessagesOutput messages={sentMessages} />;
 }
 
 export default SentMessages;

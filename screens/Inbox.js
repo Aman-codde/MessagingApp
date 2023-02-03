@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import InboxOutput from "../components/MessagesOutput/InboxOutput";
+import MessagesOutput from "../components/MessagesOutput/MessagesOutput";
 import { MessagesContext } from "../store/messages-context";
 
 function Inbox() {
@@ -9,7 +9,7 @@ function Inbox() {
     (message) => message.receiver == "aman"
   );
 
-  return <InboxOutput inboxMessages={inboxMessages} />;
+  return <MessagesOutput messages={inboxMessages} />;
 }
 
 export default Inbox;
