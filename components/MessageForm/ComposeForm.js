@@ -7,21 +7,21 @@ function ComposeForm() {
   return (
     <View>
       <Input
-        label="To"
+        placeholder="Recipient"
         textInputConfig={{
           maxLength: 10,
           onChangeText: composeHandler,
         }}
       ></Input>
       <Input
-        label="Subject"
+        placeholder="Subject"
         textInputConfig={{
           maxLength: 50,
           onChangeText: composeHandler,
         }}
       ></Input>
       <Input
-        label="Description"
+        placeholder="Description"
         textInputConfig={{
           multiline: true,
           maxLength: 100,
