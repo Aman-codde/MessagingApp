@@ -1,5 +1,6 @@
 import { useContext, useLayoutEffect } from "react";
 import { StyleSheet, View } from "react-native";
+import ComposeForm from "../components/MessageForm/ComposeForm";
 import Button from "../components/UI/Button";
 import { MessagesContext } from "../store/messages-context";
 
@@ -38,7 +39,12 @@ function ManageMessage({ route, navigation }) {
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
         <Button label="Cancel" onPress={cancelHandler} />
-        {!isEditing && <Button label="Send" onPress={composeHandler} />}
+        {!isEditing && (
+          <View>
+            <ComposeForm></ComposeForm>
+            <Button label="Send" onPress={composeHandler} />
+          </View>
+        )}
         <View style={styles.deleteContainer}>
           {isEditing && <Button label="Delete" onPress={deleteHandler} />}
         </View>
