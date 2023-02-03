@@ -1,8 +1,11 @@
-import { useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import Button from "../components/UI/Button";
+import { MessagesContext } from "../store/messages-context";
 
 function ManageMessage({ route, navigation }) {
+  const messagesCtx = useContext(MessagesContext);
+
   const editedMessageId = route.params?.messageId;
   const isEditing = editedMessageId;
 
@@ -12,7 +15,10 @@ function ManageMessage({ route, navigation }) {
     });
   }, [navigation, isEditing]);
 
-  function deleteHandler() {}
+  function deleteHandler() {
+    messagesCtx.deleteMessage(editedMessageId);
+    navigation.goBack();
+  }
 
   function cancelHandler() {
     navigation.goBack();
