@@ -47,7 +47,7 @@ const DUMMY_MESSAGES = [
 
 export const MessagesContext = createContext({
   messages: [],
-  createMessage: ({ receiver, title, body }) => {},
+  createMessage: ({ receiver, title, body, sender }) => {},
   deleteMessage: (id) => {},
 });
 
