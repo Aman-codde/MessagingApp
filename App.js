@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Button from "./components/UI/Button";
 import ManageMessage from "./screens/ManageMessage";
+import MessagesContextProvider from "./store/messages-context";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -34,20 +35,22 @@ export default function App() {
   return (
     <>
       <StatusBar style="auto" />
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="MessagesOverview"
-            component={MessagesOverview}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="ManageMessage"
-            component={ManageMessage}
-            options={{ presentation: "modal" }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <MessagesContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="MessagesOverview"
+              component={MessagesOverview}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="ManageMessage"
+              component={ManageMessage}
+              options={{ presentation: "modal" }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </MessagesContextProvider>
     </>
   );
 }
