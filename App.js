@@ -5,7 +5,7 @@ import SentMessages from "./screens/SentMessages";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Button from "./components/UI/Button";
-import ManageMessage from "./components/ManageMessage";
+import ManageMessage from "./screens/ManageMessage";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();

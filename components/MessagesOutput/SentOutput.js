@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from "react-native";
+import { View } from "react-native";
 import SentList from "./SentList";
 
 const DUMMY_SENT_MESSAGES = [

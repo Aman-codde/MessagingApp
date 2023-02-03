@@ -1,4 +1,4 @@
-import SentOutput from "../components/SentOutput";
+import SentOutput from "../components/MessagesOutput/SentOutput";
 
 function SentMessages() {
   return <SentOutput />;

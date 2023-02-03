@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import Button from "./UI/Button";
+import Button from "../components/UI/Button";
 
 function ManageMessage({ route, navigation }) {
   const editedMessageId = route.params?.messageId;

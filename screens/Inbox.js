@@ -1,4 +1,4 @@
-import InboxOutput from "../components/InboxOutput";
+import InboxOutput from "../components/MessagesOutput/InboxOutput";
 
 function Inbox() {
   return <InboxOutput />;
