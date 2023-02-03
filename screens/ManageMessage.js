@@ -14,7 +14,9 @@ function ManageMessage({ route, navigation }) {
 
   function deleteHandler() {}
 
-  function cancelHandler() {}
+  function cancelHandler() {
+    navigation.goBack();
+  }
 
   function composeHandler() {}
 
