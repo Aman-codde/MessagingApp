@@ -1,9 +1,10 @@
 import { useLayoutEffect } from "react";
-import { Text } from "react-native";
+import { StyleSheet, View } from "react-native";
+import Button from "./UI/Button";
 
 function ManageMessage({ route, navigation }) {
   const editedMessageId = route.params?.messageId;
-  const isEditing = !!editedMessageId;
+  const isEditing = editedMessageId;
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -11,6 +12,34 @@ function ManageMessage({ route, navigation }) {
     });
   }, [navigation, isEditing]);
 
-  return <Text>Manage Message Screen(View or Delete Message)</Text>;
+  function deleteHandler() {}
+
+  function cancelHandler() {}
+
+  function composeHandler() {}
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.buttonContainer}>
+        <Button label="Cancel" onPress={cancelHandler} />
+        {!isEditing && <Button label="Send" onPress={composeHandler} />}
+        <View style={styles.deleteContainer}>
+          {isEditing && <Button label="Delete" onPress={deleteHandler} />}
+        </View>
+      </View>
+    </View>
+  );
 }
 export default ManageMessage;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 24,
+  },
+  buttonContainer: {
+    marginTop: 16,
+    paddingTop: 8,
+    alignItems: "center",
+  },
+});
