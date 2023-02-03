@@ -9,7 +9,9 @@ function Inbox() {
     (message) => message.receiver == "aman"
   );
 
-  return <MessagesOutput messages={inboxMessages} />;
+  const emptyInboxInfo = "The Inbox is empty";
+
+  return <MessagesOutput messages={inboxMessages} info={emptyInboxInfo} />;
 }
 
 export default Inbox;

@@ -8,7 +8,9 @@ function SentMessages() {
     (message) => message.sender == "aman"
   );
 
-  return <MessagesOutput messages={sentMessages} />;
+  const noSentMsgsInfo = "There are no sent messages.";
+
+  return <MessagesOutput messages={sentMessages} info={noSentMsgsInfo} />;
 }
 
 export default SentMessages;
