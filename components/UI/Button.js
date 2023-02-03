@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 
 function Button({ label, onPress }) {
   return (
-    <View>
+    <View style={styles.container}>
       <Pressable
         onPress={onPress}
         style={({ pressed }) => pressed && styles.pressed}
@@ -18,6 +18,9 @@ function Button({ label, onPress }) {
 export default Button;
 
 const styles = StyleSheet.create({
+  container: {
+    width: 100,
+  },
   buttonContainer: {
     borderRadius: 4,
     margin: 8,
