@@ -45,8 +45,6 @@ const DUMMY_MESSAGES = [
   },
 ];
 
-const DUMMY_INBOX_MESSAGES = [];
-
 export const MessagesContext = createContext({
   messages: [],
   createMessage: ({ receiver, title, body }) => {},
