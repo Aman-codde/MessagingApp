@@ -11,6 +11,7 @@ function MessageItem({ id, sender, title, body, receiver }) {
       messageId: id,
     });
   }
+
   return (
     <Pressable
       onPress={messagePressHandler}
