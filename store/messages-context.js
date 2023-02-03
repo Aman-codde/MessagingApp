@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 
-const DUMMY_SENT_MESSAGES = [
+const DUMMY_MESSAGES = [
   {
     id: "s1",
     sender: "aman",
@@ -22,7 +22,30 @@ const DUMMY_SENT_MESSAGES = [
     title: "reply to meeting info ",
     body: "I am looking forward to attend the meeting.",
   },
+  {
+    id: "m1",
+    sender: "sender1",
+    receiver: "aman",
+    title: "greeting",
+    body: "Good Morning",
+  },
+  {
+    id: "m2",
+    sender: "sender2",
+    receiver: "aman",
+    title: "invitation",
+    body: "Join the Birthday celebration on Feb 4,2023 at 2:00PM",
+  },
+  {
+    id: "m3",
+    sender: "sender3",
+    receiver: "aman",
+    title: "meeting info",
+    body: "the company meeting is happening on Feb 17,2023 at 3:00PM ",
+  },
 ];
+
+const DUMMY_INBOX_MESSAGES = [];
 
 export const MessagesContext = createContext({
   messages: [],
@@ -43,10 +66,7 @@ function messagesReducer(state, action) {
 }
 
 function MessagesContextProvider({ children }) {
-  const [messagesState, dispatch] = useReducer(
-    messagesReducer,
-    DUMMY_SENT_MESSAGES
-  );
+  const [messagesState, dispatch] = useReducer(messagesReducer, DUMMY_MESSAGES);
 
   function createMessage(messageData) {
     dispatch({ type: "CREATE", payload: messageData });
@@ -56,7 +76,17 @@ function MessagesContextProvider({ children }) {
     dispatch({ type: "DELETE", payload: id });
   }
 
-  return <MessagesContext.Provider>{children}</MessagesContext.Provider>;
+  const value = {
+    messages: messagesState,
+    createMessage: createMessage,
+    deleteMessage: deleteMessage,
+  };
+
+  return (
+    <MessagesContext.Provider value={value}>
+      {children}
+    </MessagesContext.Provider>
+  );
 }
 
 export default MessagesContextProvider;
