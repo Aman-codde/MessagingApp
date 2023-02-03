@@ -24,7 +24,15 @@ function ManageMessage({ route, navigation }) {
     navigation.goBack();
   }
 
-  function composeHandler() {}
+  function composeHandler() {
+    messagesCtx.createMessage({
+      receiver: "receiver5",
+      title: "Macy's 75% Sale offer",
+      body: "Grab your favourite stuff. Offer valid till February 15,2023!!",
+      sender: "aman",
+    });
+    navigation.goBack();
+  }
 
   return (
     <View style={styles.container}>
