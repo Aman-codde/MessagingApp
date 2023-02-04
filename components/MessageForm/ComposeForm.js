@@ -6,7 +6,7 @@ import Button from "../UI/Button";
 function ComposeForm({ onSubmit }) {
   const [inputValues, setInputValues] = useState({
     receiver: "",
-    sender: "aman",
+    sender: "Aman",
     title: "",
     body: "",
   });
