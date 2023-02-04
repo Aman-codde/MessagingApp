@@ -1,5 +1,5 @@
 import Input from "./Input";
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import { useState } from "react";
 import Button from "../UI/Button";
 
@@ -25,6 +25,14 @@ function ComposeForm({ onSubmit }) {
       body: inputValues.body,
     };
 
+    if (
+      messageData.receiver.trim().length == 0 ||
+      messageData.title.trim().length == 0 ||
+      messageData.body.trim().length == 0
+    ) {
+      Alert.alert("Invalid Input, Please Enter all fields.");
+      return;
+    }
     onSubmit(messageData);
   }
 
@@ -33,7 +41,7 @@ function ComposeForm({ onSubmit }) {
       <Input
         placeholder="Recipient"
         textInputConfig={{
-          maxLength: 10,
+          maxLength: 20,
           onChangeText: inputChangeHandler.bind(this, "receiver"),
           value: inputValues.receiver,
         }}
