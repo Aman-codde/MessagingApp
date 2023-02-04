@@ -25,13 +25,8 @@ function ManageMessage({ route, navigation }) {
     navigation.goBack();
   }
 
-  function composeHandler() {
-    messagesCtx.createMessage({
-      receiver: "receiver5",
-      title: "Macy's 75% Sale offer",
-      body: "Grab your favourite stuff. Offer valid till February 15,2023!!",
-      sender: "aman",
-    });
+  function composeHandler(messageData) {
+    messagesCtx.createMessage(messageData);
     navigation.goBack();
   }
 
@@ -40,8 +35,7 @@ function ManageMessage({ route, navigation }) {
       <Button label="Cancel" onPress={cancelHandler} />
       {!isEditing && (
         <View style={styles.form}>
-          <ComposeForm></ComposeForm>
-          <Button label="Send" style={styles.button} onPress={composeHandler} />
+          <ComposeForm onSubmit={composeHandler}></ComposeForm>
         </View>
       )}
       <View style={styles.deleteContainer}>
@@ -57,10 +51,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     alignItems: "left",
-  },
-  button: {
-    width: 100,
-    textAlign: "left",
   },
   form: {
     margin: 10,
