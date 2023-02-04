@@ -4,6 +4,7 @@ import ComposeForm from "../components/MessageForm/ComposeForm";
 import MessageItem from "../components/MessagesOutput/MessageItem";
 import Button from "../components/UI/Button";
 import { MessagesContext } from "../store/messages-context";
+import storeMessage from "../util/http";
 
 function ManageMessage({ route, navigation }) {
   const messagesCtx = useContext(MessagesContext);
@@ -31,6 +32,7 @@ function ManageMessage({ route, navigation }) {
   }
 
   function composeHandler(messageData) {
+    storeMessage(messageData);
     messagesCtx.createMessage(messageData);
     navigation.goBack();
   }
