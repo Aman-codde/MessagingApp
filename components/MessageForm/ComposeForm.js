@@ -1,8 +1,9 @@
 import Input from "./Input";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useState } from "react";
+import Button from "../UI/Button";
 
-function ComposeForm() {
+function ComposeForm({ onSubmit }) {
   const [inputValues, setInputValues] = useState({
     receiver: "",
     sender: "aman",
@@ -14,6 +15,17 @@ function ComposeForm() {
     setInputValues((curInputValues) => {
       return { ...curInputValues, [inputIdentifier]: enteredInput };
     });
+  }
+
+  function submitHandler() {
+    const messageData = {
+      receiver: inputValues.receiver,
+      sender: inputValues.sender,
+      title: inputValues.title,
+      body: inputValues.body,
+    };
+
+    onSubmit(messageData);
   }
 
   return (
@@ -44,8 +56,16 @@ function ComposeForm() {
           value: inputValues.body,
         }}
       ></Input>
+      <Button label="Send" style={styles.button} onPress={submitHandler} />
     </View>
   );
 }
 
 export default ComposeForm;
+
+const styles = StyleSheet.create({
+  button: {
+    width: 100,
+    textAlign: "left",
+  },
+});
