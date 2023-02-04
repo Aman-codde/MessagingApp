@@ -20,7 +20,7 @@ function MessageItem({ id, sender, title, body, receiver }) {
       <View style={styles.msgContainer}>
         <Text style={styles.senderText}>{messanger}</Text>
         <Text style={styles.titleText}>{title}</Text>
-        <Text>{body}</Text>
+        <Text style={styles.body}>{body}</Text>
       </View>
     </Pressable>
   );
@@ -43,11 +43,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   titleText: {
-    fontSize: 16,
-    marginBottom: 2,
+    fontSize: 18,
+    marginBottom: 8,
   },
   pressed: {
     opacity: 0.2,
     backgroundColor: "darkgrey",
+  },
+  body: {
+    fontSize: 16,
   },
 });
