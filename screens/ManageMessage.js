@@ -31,9 +31,9 @@ function ManageMessage({ route, navigation }) {
     navigation.goBack();
   }
 
-  function composeHandler(messageData) {
-    storeMessage(messageData);
-    messagesCtx.createMessage(messageData);
+  async function composeHandler(messageData) {
+    const id = await storeMessage(messageData);
+    messagesCtx.createMessage({ ...messageData, id: id });
     navigation.goBack();
   }
 
