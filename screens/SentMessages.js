@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import MessagesOutput from "../components/MessagesOutput/MessagesOutput";
+import ErrorOverlay from "../components/UI/ErrorOverlay";
 import LoadingOverlay from "../components/UI/LoadingOverlay";
 import { MessagesContext } from "../store/messages-context";
 import { fetchMessages } from "../util/http";
 
 function SentMessages() {
   const [isFetching, setIsFetching] = useState(true);
+  const [error, setError] = useState();
 
   const messagesCtx = useContext(MessagesContext);
 
@@ -16,13 +18,25 @@ function SentMessages() {
   useEffect(() => {
     async function getMessages() {
       setIsFetching(true);
-      const messages = await fetchMessages();
+      try {
+        const messages = await fetchMessages();
+        messagesCtx.setMessages(messages);
+      } catch (err) {
+        setError("Could not fetch messages");
+      }
       setIsFetching(false);
-      messagesCtx.setMessages(messages);
     }
 
     getMessages();
   }, []);
+
+  function errorHandler() {
+    setError(null);
+  }
+
+  if (error && !isFetching) {
+    return <ErrorOverlay message={error} onConfirm={errorHandler} />;
+  }
 
   if (isFetching) {
     return <LoadingOverlay />;
