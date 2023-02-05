@@ -32,3 +32,7 @@ export async function fetchMessages() {
 
   return messages;
 }
+
+export function deleteMessage(id) {
+  return axios.delete(BACKEND_URL + `/messages/${id}.json`);
+}
