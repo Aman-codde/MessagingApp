@@ -7,9 +7,35 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Button from "./components/UI/Button";
 import ManageMessage from "./screens/ManageMessage";
 import MessagesContextProvider from "./store/messages-context";
+import Login from "./screens/Login";
+import Welcome from "./screens/WelcomeScreen";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
+
+function AuthStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Login" component={Login} />
+    </Stack.Navigator>
+  );
+}
+
+function AuthenticatedStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Welcome" component={Welcome}></Stack.Screen>
+    </Stack.Navigator>
+  );
+}
+
+function Navigation() {
+  return (
+    <NavigationContainer>
+      <AuthStack />
+    </NavigationContainer>
+  );
+}
 
 function MessagesOverview() {
   return (
@@ -35,22 +61,24 @@ export default function App() {
   return (
     <>
       <StatusBar style="auto" />
-      <MessagesContextProvider>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="MessagesOverview"
-              component={MessagesOverview}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="ManageMessage"
-              component={ManageMessage}
-              options={{ presentation: "modal" }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </MessagesContextProvider>
+      <Navigation />
     </>
   );
 }
+
+// <MessagesContextProvider>
+//   <NavigationContainer>
+//     <Stack.Navigator>
+//       <Stack.Screen
+//         name="MessagesOverview"
+//         component={MessagesOverview}
+//         options={{ headerShown: false }}
+//       />
+//       <Stack.Screen
+//         name="ManageMessage"
+//         component={ManageMessage}
+//         options={{ presentation: "modal" }}
+//       />
+//     </Stack.Navigator>
+//   </NavigationContainer>
+// </MessagesContextProvider>
