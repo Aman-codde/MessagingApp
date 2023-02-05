@@ -3,12 +3,14 @@ import { StyleSheet, View } from "react-native";
 import ComposeForm from "../components/MessageForm/ComposeForm";
 import MessageItem from "../components/MessagesOutput/MessageItem";
 import Button from "../components/UI/Button";
+import ErrorOverlay from "../components/UI/ErrorOverlay";
 import LoadingOverlay from "../components/UI/LoadingOverlay";
 import { MessagesContext } from "../store/messages-context";
 import { deleteMessage, storeMessage } from "../util/http";
 
 function ManageMessage({ route, navigation }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState();
 
   const messagesCtx = useContext(MessagesContext);
 
@@ -27,9 +29,14 @@ function ManageMessage({ route, navigation }) {
 
   async function deleteHandler() {
     setIsSubmitting(true);
-    await deleteMessage(editedMessageId);
-    messagesCtx.deleteMessage(editedMessageId);
-    navigation.goBack();
+    try {
+      await deleteMessage(editedMessageId);
+      messagesCtx.deleteMessage(editedMessageId);
+      navigation.goBack();
+    } catch (err) {
+      setError("Could not delete message, please try again later!");
+      setIsSubmitting(false);
+    }
   }
 
   function cancelHandler() {
@@ -38,9 +45,22 @@ function ManageMessage({ route, navigation }) {
 
   async function composeHandler(messageData) {
     setIsSubmitting(true);
-    const id = await storeMessage(messageData);
-    messagesCtx.createMessage({ ...messageData, id: id });
-    navigation.goBack();
+    try {
+      const id = await storeMessage(messageData);
+      messagesCtx.createMessage({ ...messageData, id: id });
+      navigation.goBack();
+    } catch (error) {
+      setError("Could not create message, please try again later!");
+      setIsSubmitting(false);
+    }
+  }
+
+  function errorHandler() {
+    setError(null);
+  }
+
+  if (error && !isSubmitting) {
+    return <ErrorOverlay message={error} onConfirm={errorHandler} />;
   }
 
   if (isSubmitting) {
