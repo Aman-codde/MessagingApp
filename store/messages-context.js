@@ -10,10 +10,10 @@ export const MessagesContext = createContext({
 function messagesReducer(state, action) {
   switch (action.type) {
     case "CREATE":
-      const id = new Date().toString() + Math.random().toString();
-      return [{ ...action.payload, id: id }, ...state];
+      return [action.payload, ...state];
     case "SET":
-      return action.payload;
+      const messagesByLatest = action.payload.reverse();
+      return messagesByLatest;
     case "DELETE":
       return state.filter((message) => message.id !== action.payload);
     default:
