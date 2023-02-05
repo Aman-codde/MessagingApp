@@ -1,12 +1,15 @@
-import { useContext, useLayoutEffect } from "react";
+import { useContext, useLayoutEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import ComposeForm from "../components/MessageForm/ComposeForm";
 import MessageItem from "../components/MessagesOutput/MessageItem";
 import Button from "../components/UI/Button";
+import LoadingOverlay from "../components/UI/LoadingOverlay";
 import { MessagesContext } from "../store/messages-context";
 import { deleteMessage, storeMessage } from "../util/http";
 
 function ManageMessage({ route, navigation }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const messagesCtx = useContext(MessagesContext);
 
   const editedMessageId = route.params?.messageId;
@@ -23,6 +26,7 @@ function ManageMessage({ route, navigation }) {
   }, [navigation, isEditing]);
 
   async function deleteHandler() {
+    setIsSubmitting(true);
     await deleteMessage(editedMessageId);
     messagesCtx.deleteMessage(editedMessageId);
     navigation.goBack();
@@ -33,9 +37,14 @@ function ManageMessage({ route, navigation }) {
   }
 
   async function composeHandler(messageData) {
+    setIsSubmitting(true);
     const id = await storeMessage(messageData);
     messagesCtx.createMessage({ ...messageData, id: id });
     navigation.goBack();
+  }
+
+  if (isSubmitting) {
+    return <LoadingOverlay />;
   }
 
   return (
