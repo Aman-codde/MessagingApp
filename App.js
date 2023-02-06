@@ -9,7 +9,8 @@ import ManageMessage from "./screens/ManageMessage";
 import MessagesContextProvider from "./store/messages-context";
 import Login from "./screens/Login";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -52,7 +53,6 @@ function Navigation() {
 }
 
 function MessagesOverview() {
-  const authCtx = useContext(AuthContext);
   return (
     <BottomTabs.Navigator
       screenOptions={({ navigation }) => ({
@@ -73,12 +73,27 @@ function MessagesOverview() {
   );
 }
 
+function Root() {
+  const authCtx = useContext(AuthContext);
+  useEffect(() => {
+    async function fetchToken() {
+      const storedToken = await AsyncStorage.getItem("token");
+
+      if (storedToken) {
+        authCtx.authenticate(storedToken);
+      }
+    }
+    fetchToken();
+  }, []);
+  return <Navigation />;
+}
+
 export default function App() {
   return (
     <>
       <StatusBar style="auto" />
       <AuthContextProvider>
-        <Navigation />
+        <Root />
       </AuthContextProvider>
     </>
   );
