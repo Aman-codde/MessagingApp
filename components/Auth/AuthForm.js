@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Alert, StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
+
 import Input from "../MessageForm/Input";
 import Button from "../UI/Button";
 
-function AuthForm() {
+function AuthForm({ onAuthenticate }) {
   const [enteredUsername, setEnteredUsername] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
 
@@ -31,6 +32,7 @@ function AuthForm() {
       Alert.alert("Invalid input! Please enter both username and password");
       return;
     }
+    onAuthenticate({ email: enteredUsername, password: enteredPassword });
     Alert.alert("form submitted");
   }
 
