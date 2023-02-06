@@ -54,6 +54,7 @@ function Navigation() {
 }
 
 function MessagesOverview() {
+  const authCtx = useContext(AuthContext);
   return (
     <BottomTabs.Navigator
       screenOptions={({ navigation }) => ({
@@ -75,7 +76,7 @@ function MessagesOverview() {
 }
 
 function Root() {
-  const [isTryingLogin, setIsTryingLogin] = useState(true);
+  //const [isTryingLogin, setIsTryingLogin] = useState(true);
   const authCtx = useContext(AuthContext);
   useEffect(() => {
     async function fetchToken() {
@@ -84,13 +85,13 @@ function Root() {
       if (storedToken) {
         authCtx.authenticate(storedToken);
       }
-      setIsTryingLogin(false);
+      //setIsTryingLogin(false);
     }
     fetchToken();
   }, []);
-  if (isTryingLogin) {
-    return <AppLoading />;
-  }
+  // if (isTryingLogin) {
+  //   return <AppLoading />;
+  // }
 
   return <Navigation />;
 }
