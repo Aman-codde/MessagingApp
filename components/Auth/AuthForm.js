@@ -20,11 +20,6 @@ function AuthForm({ onAuthenticate }) {
   }
 
   function submitHandler() {
-    // const authData = {
-    //   username: enteredUsername,
-    //   password: enteredPassword,
-    // };
-
     if (
       enteredUsername.trim().length == 0 ||
       enteredPassword.trim().length == 0
@@ -33,7 +28,6 @@ function AuthForm({ onAuthenticate }) {
       return;
     }
     onAuthenticate({ email: enteredUsername, password: enteredPassword });
-    Alert.alert("form submitted");
   }
 
   return (
