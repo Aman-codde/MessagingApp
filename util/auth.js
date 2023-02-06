@@ -1,25 +1,15 @@
 import axios from "axios";
 
-const API_KEY = "AIzaSyC4VjoXj0TlvZmE4A34j_b9tjedA82POIQ";
+// api-token-auth
+// API URL: http://interview.bixly.com Auth Scheme: Token
 
-async function authenticate(mode, email, password) {
-  const url = `https://identitytoolkit.googleapis.com/v1/accounts:${mode}?key=${API_KEY}`;
+export async function login(username, password) {
+  const url = `http://interview.bixly.com/api-token-auth/`;
   const response = await axios.post(url, {
-    email: email,
+    username: username,
     password: password,
-    returnSecureToken: true,
   });
-  const token = response.data.idToken;
+  // const userInfo = response.config["data"];
+  const token = response.data.token;
   return token;
-}
-
-// email: "aman@aman.com"
-// password: "123456"
-
-export function createUser(email, password) {
-  return authenticate("signUp", email, password);
-}
-
-export function login(email, password) {
-  return authenticate("signInWithPassword", email, password);
 }
