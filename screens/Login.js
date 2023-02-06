@@ -10,10 +10,10 @@ function Login() {
 
   const authCtx = useContext(AuthContext);
 
-  async function loginHandler({ email, password }) {
+  async function loginHandler({ username, password }) {
     setIsAuthenticating(true);
     try {
-      const token = await login(email, password);
+      const token = await login(username, password);
       authCtx.authenticate(token);
     } catch (error) {
       Alert.alert(

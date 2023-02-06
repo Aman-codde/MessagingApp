@@ -27,7 +27,7 @@ function AuthForm({ onAuthenticate }) {
       Alert.alert("Invalid input! Please enter both username and password");
       return;
     }
-    onAuthenticate({ email: enteredUsername, password: enteredPassword });
+    onAuthenticate({ username: enteredUsername, password: enteredPassword });
   }
 
   return (
