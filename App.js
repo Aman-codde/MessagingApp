@@ -8,7 +8,6 @@ import Button from "./components/UI/Button";
 import ManageMessage from "./screens/ManageMessage";
 import MessagesContextProvider from "./store/messages-context";
 import Login from "./screens/Login";
-import Welcome from "./screens/WelcomeScreen";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
 import { useContext } from "react";
 
@@ -25,9 +24,20 @@ function AuthStack() {
 
 function AuthenticatedStack() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Welcome" component={Welcome}></Stack.Screen>
-    </Stack.Navigator>
+    <MessagesContextProvider>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="MessagesOverview"
+          component={MessagesOverview}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ManageMessage"
+          component={ManageMessage}
+          options={{ presentation: "modal" }}
+        />
+      </Stack.Navigator>
+    </MessagesContextProvider>
   );
 }
 
@@ -42,10 +52,11 @@ function Navigation() {
 }
 
 function MessagesOverview() {
+  const authCtx = useContext(AuthContext);
   return (
     <BottomTabs.Navigator
       screenOptions={({ navigation }) => ({
-        headerRight: () => (
+        headerLeft: () => (
           <Button
             label="Compose"
             onPress={() => {
@@ -53,6 +64,7 @@ function MessagesOverview() {
             }}
           />
         ),
+        headerRight: () => <Button label="Logout" onPress={authCtx.logout} />,
       })}
     >
       <BottomTabs.Screen name="Inbox" component={Inbox} />
@@ -71,20 +83,3 @@ export default function App() {
     </>
   );
 }
-
-// <MessagesContextProvider>
-//   <NavigationContainer>
-//     <Stack.Navigator>
-//       <Stack.Screen
-//         name="MessagesOverview"
-//         component={MessagesOverview}
-//         options={{ headerShown: false }}
-//       />
-//       <Stack.Screen
-//         name="ManageMessage"
-//         component={ManageMessage}
-//         options={{ presentation: "modal" }}
-//       />
-//     </Stack.Navigator>
-//   </NavigationContainer>
-// </MessagesContextProvider>
