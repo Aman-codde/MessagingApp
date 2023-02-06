@@ -5,10 +5,12 @@ import MessageItem from "../components/MessagesOutput/MessageItem";
 import Button from "../components/UI/Button";
 import ErrorOverlay from "../components/UI/ErrorOverlay";
 import LoadingOverlay from "../components/UI/LoadingOverlay";
+import { AuthContext } from "../store/auth-context";
 import { MessagesContext } from "../store/messages-context";
 import { deleteMessage, storeMessage } from "../util/http";
 
 function ManageMessage({ route, navigation }) {
+  const authCtx = useContext(AuthContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState();
 
@@ -30,7 +32,7 @@ function ManageMessage({ route, navigation }) {
   async function deleteHandler() {
     setIsSubmitting(true);
     try {
-      await deleteMessage(editedMessageId);
+      await deleteMessage(editedMessageId, authCtx.token);
       messagesCtx.deleteMessage(editedMessageId);
       navigation.goBack();
     } catch (err) {
@@ -46,7 +48,7 @@ function ManageMessage({ route, navigation }) {
   async function composeHandler(messageData) {
     setIsSubmitting(true);
     try {
-      const id = await storeMessage(messageData);
+      const id = await storeMessage(messageData, authCtx.token);
       messagesCtx.createMessage({ ...messageData, id: id });
       navigation.goBack();
     } catch (error) {
