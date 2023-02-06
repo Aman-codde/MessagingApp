@@ -3,7 +3,7 @@ import { Alert } from "react-native";
 import AuthForm from "../components/Auth/AuthForm";
 import LoadingOverlay from "../components/UI/LoadingOverlay";
 import { AuthContext } from "../store/auth-context";
-import { login } from "../util/http";
+import { login } from "../util/auth";
 
 function Login() {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
@@ -19,8 +19,8 @@ function Login() {
       Alert.alert(
         "Authentication failed! Could not log you in. Please check your credentials and try again later!"
       );
+      setIsAuthenticating(false);
     }
-    setIsAuthenticating(false);
   }
 
   if (isAuthenticating) {
