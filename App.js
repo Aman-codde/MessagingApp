@@ -9,6 +9,7 @@ import ManageMessage from "./screens/ManageMessage";
 import MessagesContextProvider from "./store/messages-context";
 import Login from "./screens/Login";
 import Welcome from "./screens/WelcomeScreen";
+import AuthContextProvider from "./store/auth-context";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -31,9 +32,11 @@ function AuthenticatedStack() {
 
 function Navigation() {
   return (
-    <NavigationContainer>
-      <AuthStack />
-    </NavigationContainer>
+    <AuthContextProvider>
+      <NavigationContainer>
+        <AuthStack />
+      </NavigationContainer>
+    </AuthContextProvider>
   );
 }
 
