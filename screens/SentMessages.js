@@ -4,32 +4,32 @@ import ErrorOverlay from "../components/UI/ErrorOverlay";
 import LoadingOverlay from "../components/UI/LoadingOverlay";
 import { AuthContext } from "../store/auth-context";
 import { MessagesContext } from "../store/messages-context";
-import { fetchMessages } from "../util/http";
+import { fetchSentMessages } from "../util/http";
 
 function SentMessages() {
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState();
   const authCtx = useContext(AuthContext);
 
-  const messagesCtx = useContext(MessagesContext);
-
-  const sentMessages = messagesCtx.messages.filter(
-    (message) => message.sender == "test"
-  );
+  const [context, setContext] = useContext(MessagesContext);
 
   useEffect(() => {
-    async function getMessages() {
+    async function getSentMessages() {
       setIsFetching(true);
       try {
-        const messages = await fetchMessages(authCtx.token);
-        messagesCtx.setMessages(messages);
+        const sent_messages = await fetchSentMessages(authCtx.token);
+        setContext({
+          ...context,
+          sentMessages: sent_messages,
+          boxType: "sent",
+        });
       } catch (err) {
         setError("Could not fetch messages");
       }
       setIsFetching(false);
     }
 
-    getMessages();
+    getSentMessages();
   }, []);
 
   function errorHandler() {
@@ -46,7 +46,9 @@ function SentMessages() {
 
   const noSentMsgsInfo = "There are no sent messages.";
 
-  return <MessagesOutput messages={sentMessages} info={noSentMsgsInfo} />;
+  return (
+    <MessagesOutput messages={context.sentMessages} info={noSentMsgsInfo} />
+  );
 }
 
 export default SentMessages;
