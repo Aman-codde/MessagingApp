@@ -7,21 +7,36 @@ import ErrorOverlay from "../components/UI/ErrorOverlay";
 import LoadingOverlay from "../components/UI/LoadingOverlay";
 import { AuthContext } from "../store/auth-context";
 import { MessagesContext } from "../store/messages-context";
-import { deleteMessage, storeMessage } from "../util/http";
+import {
+  deleteMessage,
+  fetchInboxMessages,
+  fetchSentMessages,
+  storeMessage,
+} from "../util/http";
 
 function ManageMessage({ route, navigation }) {
   const authCtx = useContext(AuthContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState();
 
-  const messagesCtx = useContext(MessagesContext);
+  const [context, setContext] = useContext(MessagesContext);
+
+  async function getUpdatedMessages() {
+    try {
+      const inbox_messages = await fetchInboxMessages(authCtx.token);
+      const sent_messages = await fetchSentMessages(authCtx.token);
+      setContext({
+        ...context,
+        inboxMessages: inbox_messages,
+        sentMessages: sent_messages,
+      });
+    } catch (err) {
+      setError("Could not fetch messages");
+    }
+  }
 
   const editedMessageId = route.params?.messageId;
   const isEditing = editedMessageId;
-
-  const selectedMessage = messagesCtx.messages.find(
-    (message) => message.id === editedMessageId
-  );
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -33,7 +48,7 @@ function ManageMessage({ route, navigation }) {
     setIsSubmitting(true);
     try {
       await deleteMessage(editedMessageId, authCtx.token);
-      messagesCtx.deleteMessage(editedMessageId);
+      await getUpdatedMessages();
       navigation.goBack();
     } catch (err) {
       setError("Could not delete message, please try again later!");
@@ -48,12 +63,15 @@ function ManageMessage({ route, navigation }) {
   async function composeHandler(messageData) {
     setIsSubmitting(true);
     try {
-      const id = await storeMessage(messageData, authCtx.token);
-      messagesCtx.createMessage({ ...messageData, id: id });
+      await storeMessage(messageData, authCtx.token);
+      await getUpdatedMessages();
+
+      setIsSubmitting(false);
       navigation.goBack();
     } catch (error) {
-      setError("Could not create message, please try again later!");
       setIsSubmitting(false);
+      console.log("create err...", error);
+      setError("Could not create message, please try again later!");
     }
   }
 
