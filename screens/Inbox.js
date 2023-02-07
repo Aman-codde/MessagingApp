@@ -46,8 +46,10 @@ function Inbox() {
 
   const noInboxMsgsInfo = "The inbox is empty";
 
+  // get messages ordered by date (latest above)
+  const orderedInboxMessages = context.inboxMessages.reverse();
   return (
-    <MessagesOutput messages={context.inboxMessages} info={noInboxMsgsInfo} />
+    <MessagesOutput messages={orderedInboxMessages} info={noInboxMsgsInfo} />
   );
 }
 

@@ -46,8 +46,11 @@ function SentMessages() {
 
   const noSentMsgsInfo = "There are no sent messages.";
 
+  // get messages ordered by date (latest above)
+  const orderedSentMessages = context.sentMessages.reverse();
+
   return (
-    <MessagesOutput messages={context.sentMessages} info={noSentMsgsInfo} />
+    <MessagesOutput messages={orderedSentMessages} info={noSentMsgsInfo} />
   );
 }
 
