@@ -2,9 +2,6 @@ import { useNavigation } from "@react-navigation/native";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 function MessageItem({ id, sender, title, body, receiver }) {
-  let messanger;
-  receiver ? (messanger = receiver) : (messanger = sender);
-
   const navigation = useNavigation();
   function messagePressHandler() {
     navigation.navigate("ManageMessage", {
@@ -18,7 +15,7 @@ function MessageItem({ id, sender, title, body, receiver }) {
       style={({ pressed }) => pressed && styles.pressed}
     >
       <View style={styles.msgContainer}>
-        <Text style={styles.senderText}>{messanger}</Text>
+        <Text style={styles.senderText}>{receiver}</Text>
         <Text style={styles.titleText}>{title}</Text>
         <Text style={styles.body}>{body}</Text>
       </View>
