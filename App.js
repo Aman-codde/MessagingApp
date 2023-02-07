@@ -9,9 +9,8 @@ import ManageMessage from "./screens/ManageMessage";
 import MessagesContextProvider from "./store/messages-context";
 import Login from "./screens/Login";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import AppLoading from "expo-app-loading";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -76,7 +75,6 @@ function MessagesOverview() {
 }
 
 function Root() {
-  //const [isTryingLogin, setIsTryingLogin] = useState(true);
   const authCtx = useContext(AuthContext);
   useEffect(() => {
     async function fetchToken() {
@@ -85,13 +83,9 @@ function Root() {
       if (storedToken) {
         authCtx.authenticate(storedToken);
       }
-      //setIsTryingLogin(false);
     }
     fetchToken();
   }, []);
-  // if (isTryingLogin) {
-  //   return <AppLoading />;
-  // }
 
   return <Navigation />;
 }

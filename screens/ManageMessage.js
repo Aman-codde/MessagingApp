@@ -81,7 +81,6 @@ function ManageMessage({ route, navigation }) {
       navigation.goBack();
     } catch (error) {
       setIsSubmitting(false);
-      console.log("create err...", error);
       setError("Could not create message, please try again later!");
     }
   }
