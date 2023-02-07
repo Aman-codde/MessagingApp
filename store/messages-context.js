@@ -1,53 +1,16 @@
-import { createContext, useReducer } from "react";
+import { createContext, useState } from "react";
 
-export const MessagesContext = createContext({
-  messages: [],
-  createMessage: ({ receiver, title, body, sender }) => {},
-  setMessages: (messages) => {},
-  deleteMessage: (id) => {},
-});
+export const MessagesContext = createContext(null);
 
-function messagesReducer(state, action) {
-  switch (action.type) {
-    case "CREATE":
-      return [action.payload, ...state];
-    case "SET":
-      const messagesByLatest = action.payload.reverse();
-      return messagesByLatest;
-    case "DELETE":
-      return state.filter((message) => message.id !== action.payload);
-    default:
-      return state;
-  }
-}
+const { Provider } = MessagesContext;
 
 function MessagesContextProvider({ children }) {
-  const [messagesState, dispatch] = useReducer(messagesReducer, []);
-
-  function createMessage(messageData) {
-    dispatch({ type: "CREATE", payload: messageData });
-  }
-
-  function setMessages(messages) {
-    dispatch({ type: "SET", payload: messages });
-  }
-
-  function deleteMessage(id) {
-    dispatch({ type: "DELETE", payload: id });
-  }
-
-  const value = {
-    messages: messagesState,
-    createMessage: createMessage,
-    setMessages: setMessages,
-    deleteMessage: deleteMessage,
-  };
-
-  return (
-    <MessagesContext.Provider value={value}>
-      {children}
-    </MessagesContext.Provider>
-  );
+  const [state, setState] = useState({
+    inboxMessages: [],
+    sentMessages: [],
+    boxType: "",
+  });
+  return <Provider value={[state, setState]}>{children}</Provider>;
 }
 
 export default MessagesContextProvider;
