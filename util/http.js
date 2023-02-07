@@ -56,3 +56,18 @@ export async function deleteMessage(id, token) {
   const result = delete_response.data;
   return result;
 }
+
+// get particular message
+// export async function getMessage(id, token) {
+//   const selected_msg_response = await axios.get(
+//     BACKEND_URL + "messages/" + id + "/",
+//     {
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: "Token " + token,
+//       },
+//     }
+//   );
+//   const result = selected_msg_response.data;
+//   return result;
+// }
