@@ -6,7 +6,6 @@ import Button from "../UI/Button";
 function ComposeForm({ onSubmit }) {
   const [inputValues, setInputValues] = useState({
     receiver: "",
-    sender: "Aman",
     title: "",
     body: "",
   });
@@ -20,7 +19,6 @@ function ComposeForm({ onSubmit }) {
   function submitHandler() {
     const messageData = {
       receiver: inputValues.receiver,
-      sender: inputValues.sender,
       title: inputValues.title,
       body: inputValues.body,
     };
@@ -30,7 +28,7 @@ function ComposeForm({ onSubmit }) {
       messageData.title.trim().length == 0 ||
       messageData.body.trim().length == 0
     ) {
-      Alert.alert("Invalid Input, Please Enter all fields.");
+      Alert.alert("Invalid Input! Please Enter all fields.");
       return;
     }
     onSubmit(messageData);
