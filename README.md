@@ -29,16 +29,40 @@ React Native Messaging App with Axios library for http requests(login, logout, g
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+This is a Messaging App that allows users to send and receive messages
 
-
+Functionalities Built:
+* Login screen:
+  Authenticated User should be able to save authentication token to skip login after initial login
+* Inbox:
+  List of messages received
+  Ability to delete an individual message
+* Sent:
+  List of messages sent
+  Ability to delete an individual message
+* Compose:
+  Includes recipient, title, and body 
+* Error messages:
+  Should show an error if any of the requests are invalid
+  
+ <img width="50%" height="30%" alt="App1" src="https://user-images.githubusercontent.com/78620905/217341968-a8417303-53ed-48be-88ab-16c44903100f.png">
+ <img width="50%" height="30%" alt="App2" src="https://user-images.githubusercontent.com/78620905/217344537-fa61a02c-922d-49b5-94fe-1572ef7aa129.png"> 
+ <img width="50%" height="30%" alt="App3" src="https://user-images.githubusercontent.com/78620905/217346511-8e88c40b-cd10-4c6b-87d5-390e470bb52f.png">
 
 
 ### Built With
-
-
-
-
-
+* Expo
+* [React Native](https://reactnative.dev/docs/getting-started)
+* [React Native Navigation] (https://wix.github.io/react-native-navigation/docs/before-you-start/)
+* [React Context](https://reactjs.org/docs/context.html)
+* [AsyncStorage](https://react-native-async-storage.github.io/async-storage/docs/install/)
+  ```sh
+  npm install @react-native-async-storage/async-storage
+  ```
+* [Axios](https://axios-http.com/docs/intro)
+  ```sh
+  npm install axios
+  ```
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -63,33 +87,13 @@ Steps to install, set up and run the app.
    ```sh
    npm install
    ```
-4. Run the project
+4. Install expo cli
    ```sh
-   npm start
-
-   
+   npm install -g expo-cli
+   ```
+5. Run the project by npm or expo
+   ```sh
+   npm start  or npx expo start
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-
