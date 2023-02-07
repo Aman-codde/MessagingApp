@@ -6,7 +6,7 @@ function Inbox() {
   const messagesCtx = useContext(MessagesContext);
 
   const inboxMessages = messagesCtx.messages.filter(
-    (message) => message.receiver == "Aman"
+    (message) => message.receiver == "test"
   );
 
   const emptyInboxInfo = "The Inbox is empty";

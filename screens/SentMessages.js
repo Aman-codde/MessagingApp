@@ -14,7 +14,7 @@ function SentMessages() {
   const messagesCtx = useContext(MessagesContext);
 
   const sentMessages = messagesCtx.messages.filter(
-    (message) => message.sender == "Aman"
+    (message) => message.sender == "test"
   );
 
   useEffect(() => {
