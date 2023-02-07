@@ -66,7 +66,7 @@ Functionalities Built:
 <!-- GETTING STARTED -->
 ## Getting Started
 
-
+<!-- PREREQUISITES -->
 ### Prerequisites
 
 
@@ -74,7 +74,7 @@ Functionalities Built:
   ```sh
   npm install npm@latest -g
   ```
-
+<!-- INSTALLATION -->
 ### Installation
 
 Steps to install, set up and run the app.
@@ -95,5 +95,18 @@ Steps to install, set up and run the app.
    ```sh
    npm start  or npx expo start
    ```
+<!-- PROJECT STRUCTURE -->
+## Project Structure
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+    /app                    - React native specific code
+        /components         - reusable react native components
+          /Auth             - react native login form component
+          /MessageForm      - react native message form component
+          /MessagesOutput   - react native display messages component
+          /UI               - react native reusable Button, Error, Loading component
+        /screens            - connected to store components
+        /store              - all context actions,reducers
+        /util               - backend api requests(authentication, get, post, delete)
+        /App.js             - App Root component  
+    /assets                 - contains image and fonts
+   
