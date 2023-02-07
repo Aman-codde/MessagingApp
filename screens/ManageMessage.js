@@ -38,6 +38,17 @@ function ManageMessage({ route, navigation }) {
   const editedMessageId = route.params?.messageId;
   const isEditing = editedMessageId;
 
+  let selectedMessage;
+  if (context.boxType == "inbox") {
+    selectedMessage = context.inboxMessages.find(
+      (message) => message.id === editedMessageId
+    );
+  } else {
+    selectedMessage = context.sentMessages.find(
+      (message) => message.id === editedMessageId
+    );
+  }
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: isEditing ? "View/Delete Message" : "New Message",
